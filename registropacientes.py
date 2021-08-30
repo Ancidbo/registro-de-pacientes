@@ -18,11 +18,11 @@ class RegisterNewUser(unittest.TestCase):
 
     def test_new_user(self):
         driver = self.driver
-        driver.get('')
+        driver.get('http://mydocfam.com:4200/registro')
         driver.implicitly_wait(10) 
         
         lista = []
-        with open('data.csv') as data:
+        with open('prueba.csv') as data:
             entrada = csv.reader(data)
             lista = list (entrada)
         x=0
@@ -75,16 +75,20 @@ class RegisterNewUser(unittest.TestCase):
                 number.send_keys(telefono)
 
                 select_sex.select_by_visible_text(sexo)
+                driver.implicitly_wait(1)
             
-                create_account = driver.find_element_by_xpath('/html/body/app-root/div/app-register/body/div/div/div/div[2]/div[10]/input')
+                create_account = driver.find_element_by_xpath('//*[@id="container-princ"]/app-register/body/div/div/div/div[2]/div[10]/button')
                 self.assertTrue(create_account.is_displayed() 
                 and create_account.is_enabled())
                 create_account.click()
+                driver.implicitly_wait(2)
 
                 accept_terms = driver.find_element_by_xpath('/html/body/ngb-modal-window/div/div/div[2]/div[2]/button[2]')
                 self.assertTrue(accept_terms.is_displayed() 
                 and accept_terms.is_enabled())
                 accept_terms.click()
+                
+                driver.implicitly_wait(4)
 
         
 
